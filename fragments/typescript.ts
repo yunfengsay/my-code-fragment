@@ -19,3 +19,11 @@ export const jf = (data: any, space = 4) => {
   return JSON.stringify(data, null, space);
 };
 
+export const objectDeepWalk = (obj:any, func: Function) => {
+    if(typeof obj !== 'object') return;
+    for(let keyName in obj) {
+        const item = obj[keyName]; 
+        func(obj, item,  keyName);
+        objectDeepWalk(item, func)
+    }
+}
